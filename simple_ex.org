@@ -11,7 +11,7 @@
 
 ** Bind values to names let / in
 We bind the value ~10~ to the name ~a~.
-#+begin_src nix :results output
+#+begin_src nix :results output :exports both
 let
   a = 10;
 in
