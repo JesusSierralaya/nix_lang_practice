@@ -2,7 +2,7 @@
 
 * Intro
 ** Hello world!
-#+begin_src nix :results output
+#+begin_src nix :results output :exports both
 "Hello world!"
 #+end_src
 
@@ -22,7 +22,7 @@ in
 : 10
 
 ** Attribute assigned to a variable
-#+begin_src nix :results output
+#+begin_src nix :results output :exports both
 let
   mySet = { y = 3; };
 in
