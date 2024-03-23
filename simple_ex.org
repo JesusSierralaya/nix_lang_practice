@@ -1,0 +1,31 @@
+#+title: Nix Language
+
+* Intro
+** Hello world!
+#+begin_src nix :results output
+"Hello world!"
+#+end_src
+
+#+RESULTS:
+: "Hello world!"
+** Bind values to names let / in
+We bind the value ~10~ to the name ~a~.
+#+begin_src nix :results output
+let
+  a = 10;
+in
+  a
+#+end_src
+
+#+RESULTS:
+: 10
+** Attribute assigned to a variable
+#+begin_src nix :results output
+let
+  mySet = { y = 3; };
+in
+mySet.y
+#+end_src
+
+#+RESULTS:
+: 3
