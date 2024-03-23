@@ -8,6 +8,7 @@
 
 #+RESULTS:
 : "Hello world!"
+
 ** Bind values to names let / in
 We bind the value ~10~ to the name ~a~.
 #+begin_src nix :results output
@@ -19,6 +20,7 @@ in
 
 #+RESULTS:
 : 10
+
 ** Attribute assigned to a variable
 #+begin_src nix :results output
 let
