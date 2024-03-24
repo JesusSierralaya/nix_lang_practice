@@ -34,6 +34,21 @@ in
 #+RESULTS:
 : 6
 
+** Nested
+~let~ blocks can be nested.
+#+begin_src nix :exports both
+let
+  base = 10;
+in
+  let
+    multiplier = 2;
+  in
+    base * multiplier
+#+end_src
+
+#+RESULTS:
+: 20
+
 ** Attribute assigned to a variable
 #+begin_src nix :exports both
 let
@@ -44,3 +59,18 @@ mySet.y
 
 #+RESULTS:
 : 3
+
+** Using 'let' with attribute sets
+~let~ is often used with attribute sets to define multiple related values
+#+begin_src nix :exports both
+let
+  config = {
+    name = "example";
+    value = 42;
+  };
+in
+  "Name: ${config.name}, Value: ${toString config.value}"
+#+end_src
+
+#+RESULTS:
+: "Name: example, Value: 42"
