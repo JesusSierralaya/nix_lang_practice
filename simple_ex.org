@@ -22,6 +22,18 @@ in
 #+RESULTS:
 : 10
 
+** Multiple bindings
+#+begin_src nix :exports both
+let
+  a = 2;
+  b = 3;
+in
+  a * b
+#+end_src
+
+#+RESULTS:
+: 6
+
 ** Attribute assigned to a variable
 #+begin_src nix :exports both
 let
