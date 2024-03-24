@@ -1,7 +1,21 @@
 #+title: Nix Language
 #+PROPERTY: header-args :results output
+#+OPTIONS: toc:2
 
-:toc:
+* Table of contents :toc:
+- [[#let---in-and-attributes][Let - in and attributes]]
+  - [[#hello-world][Hello world!]]
+  - [[#bind-values-to-names-let--in][Bind values to names let / in]]
+  - [[#multiple-bindings][Multiple bindings]]
+  - [[#nested][Nested]]
+  - [[#attribute-assigned-to-a-variable][Attribute assigned to a variable]]
+  - [[#using-let-with-attribute-sets][Using 'let' with attribute sets]]
+  - [[#attribute-selection][Attribute selection]]
+  - [[#attribute-selection-with-a-default-value][Attribute selection with a default value]]
+  - [[#merge-two-sets][Merge two sets]]
+- [[#control-structures][Control structures]]
+  - [[#conditional-expression][Conditional expression]]
+  - [[#assertion-check][Assertion check]]
 
 * Let - in and attributes
 ** Hello world!
