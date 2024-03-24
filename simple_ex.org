@@ -16,6 +16,15 @@
 - [[#control-structures][Control structures]]
   - [[#conditional-expression][Conditional expression]]
   - [[#assertion-check][Assertion check]]
+  - [[#variable-definition][Variable definition]]
+  - [[#add-all-attributes-from-the-given-set-to-the-scope][Add all attributes from the given set to the scope]]
+- [[#functions-lambdas][Functions (lambdas)]]
+  - [[#simple-function][Simple function]]
+  - [[#using-the-function][Using the function]]
+  - [[#curried-function][Curried function]]
+  - [[#function-call][Function call]]
+  - [[#bound-to-a-variable-and-called-by-name][Bound to a variable and called by name]]
+  - [[#expected-attributes][Expected attributes]]
 
 * Let - in and attributes
 ** Hello world!
@@ -130,4 +139,87 @@ assert 1 + 1 == 2; "yes!"
 #+end_src
 
 #+RESULTS:
-: "yes!"
+: "yes! "
+
+** Variable definition
+#+begin_src nix :exports both
+let x = "foo"; y = "bar"; in x + y
+#+end_src
+
+#+RESULTS:
+: "foobar"
+
+** Add all attributes from the given set to the scope
+#+begin_src nix :exports both
+with builtins; head [2 3 4 5]
+#+end_src
+
+#+RESULTS:
+: 2
+
+*
+* Functions (lambdas)
+** Simple function
+A function that expetcs an integer and returns it icreased by 1
+#+begin_src nix :exports both
+x: x + 1
+#+end_src
+
+#+RESULTS:
+: <LAMBDA>
+
+** Using the function
+#+begin_src nix :exports both
+let increment = x: x + 1; in increment 3
+#+end_src
+
+#+RESULTS:
+: 4
+
+** Curried function
+Can be used like a function that takes two arguments
+#+begin_src nix :exports both
+x: y: x + y
+#+end_src
+
+#+RESULTS:
+: <LAMBDA>
+** Function call
+#+begin_src nix :exports both
+(x: x + 1) 100
+#+end_src
+
+#+RESULTS:
+: 101
+** Bound to a variable and called by name
+#+begin_src nix :exports both
+let inc = x: x + 1; in inc (inc (inc 100))
+#+end_src
+
+#+RESULTS:
+: 103
+
+** Expected attributes
+*** Numbers
+#+begin_src nix :exports both
+let add = { x, y }: x + y; in add { x = 3; y = 5; }
+#+end_src
+
+#+RESULTS:
+: 8
+
+*** Optional with default value
+#+begin_src nix :exports both
+let add = { x, y ? "default" }: x + y; in add { x = "value "; }
+#+end_src
+
+#+RESULTS:
+: "value default"
+
+*** Ignore any other attributes
+#+begin_src nix :exports both
+let add = { x, y , ...}: x + y; in add { x = 1; y = 2; z = 5;}
+#+end_src
+
+#+RESULTS:
+: 3
