@@ -1,9 +1,9 @@
 #+title: Nix Language
-#+PROPERTY: header-args :results output :exports both
+#+PROPERTY: header-args :results output
 
 * Intro
 ** Hello world!
-#+begin_src nix
+#+begin_src nix :exports both
 "Hello world!"
 #+end_src
 
@@ -12,7 +12,7 @@
 
 ** Bind values to names let / in
 We bind the value ~10~ to the name ~a~.
-#+begin_src nix
+#+begin_src nix :exports both
 let
   a = 10;
 in
@@ -35,7 +35,7 @@ in
 : 6
 
 ** Attribute assigned to a variable
-#+begin_src nix
+#+begin_src nix :exports both
 let
   mySet = { y = 3; };
 in
