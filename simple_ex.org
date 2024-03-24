@@ -1,7 +1,9 @@
 #+title: Nix Language
 #+PROPERTY: header-args :results output
 
-* Intro
+:toc:
+
+* Let - in and attributes
 ** Hello world!
 #+begin_src nix :exports both
 "Hello world!"
@@ -74,3 +76,44 @@ in
 
 #+RESULTS:
 : "Name: example, Value: 42"
+
+** Attribute selection
+#+begin_src nix :exports both
+{x = 1; y = 2;}.x
+#+end_src
+
+#+RESULTS:
+: 1
+
+** Attribute selection with a default value
+#+begin_src nix :export both
+{x = 1; y = 2;}.z or 3
+#+end_src
+
+#+RESULTS:
+: 3
+
+** Merge two sets
+#+begin_src nix :exports both
+{x = 1; y = 2;} // {z = 3;}
+#+end_src
+
+#+RESULTS:
+: { x = 1; y = 2; z = 3; }
+
+* Control structures
+** Conditional expression
+#+begin_src nix :exports both
+if 1 + 1 == 2 then "yes!" else "no!"
+#+end_src
+
+#+RESULTS:
+: "yes!"
+
+** Assertion check
+#+begin_src nix :exports both
+assert 1 + 1 == 2; "yes!"
+#+end_src
+
+#+RESULTS:
+: "yes!"
