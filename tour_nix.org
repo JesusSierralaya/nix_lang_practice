@@ -1,0 +1,112 @@
+#+title: A tour of nix
+
+* Multi line
+#+begin_src nix :exports both :results output
+let
+  user = "mrNix";
+  pass = "99superPassword";
+  vip = true;
+  vipString = if vip == true then "true" else "...";
+in
+  "
+  ${user}
+   password: ${pass}
+   vip: ${vipString}
+  "
+#+end_src
+
+#+RESULTS:
+: "\n  mrNix\n   password: 99superPassword\n   vip: true\n  "
+
+* toString
+#+begin_src nix :exports both :results output
+let
+  h = "String";
+  v = 4;
+in
+  "${h} ${toString v} the win!"
+#+end_src
+
+#+RESULTS:
+: "String 4 the win!"
+
+* Using Functions
+** Simple
+#+begin_src nix :exports both :results output
+let
+  f = "f";
+  o = "o";
+  func = a: b: c: a + b + c;
+in
+  func f o o
+#+end_src
+
+#+RESULTS:
+: "foo"
+
+** Creating one
+#+begin_src nix :exports both :results output
+let
+  min = a: b: if a < b then a else b;
+  max = a: b: if a > b then a else b;
+in
+  min 2 3
+#+end_src
+
+#+RESULTS:
+: 2
+
+** Using nixpkgs
+*** min
+#+begin_src nix :exports both :results output
+with import <nixpkgs> {};
+  lib.min 9 1
+#+end_src
+
+#+RESULTS:
+: 1
+
+*** max
+#+begin_src nix :exports both :results output
+with import <nixpkgs> {};
+  lib.max 9 1
+#+end_src
+
+#+RESULTS:
+: 9
+
+*** length
+#+begin_src nix :exports both :results output
+with import <nixpkgs> {};
+  lib.length [9 1]
+#+end_src
+
+#+RESULTS:
+: 2
+
+*** Concatenate strings
+#+begin_src nix :exports both :results output
+with import <nixpkgs> {};
+  lib.strings.concatStringsSep ", " ["Hello" "World"]
+#+end_src
+
+#+RESULTS:
+: "Hello, World"
+
+*** Get the attribute names
+#+begin_src nix :exports both :results output
+with import <nixpkgs> {};
+lib.attrNames {a = 1; b = 2;}
+#+end_src
+
+#+RESULTS:
+: [ "a" "b" ]
+
+*** Get the attribute values
+#+begin_src nix :exports both :results output
+with import <nixpkgs> {};
+lib.attrValues {a = 1; b = 2;}
+#+end_src
+
+#+RESULTS:
+: [ 1 2 ]
