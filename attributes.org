@@ -1,0 +1,94 @@
+#+title: Attributes
+
+* All primitive data
+#+begin_src nix :exports both :results output
+{
+  string = "hello";
+  integer = 1;
+  float = 3.141;
+  bool = true;
+  null = null;
+  list = [ 1 "two" false ];
+  attribute-set = {
+    a = "hello";
+    b = 2;
+    c = 5.4;
+  }; # comments
+}
+#+end_src
+
+#+RESULTS:
+: { attribute-set = <CODE>; bool = true; float = 3.141; integer = 1; list = <CODE>; null = null; string = "hello"; }
+
+* Recursive attr set
+#+begin_src nix :exports both :results output
+rec {
+  one = 1;
+  two = one + 1;
+  three = two + 1;
+}
+#+end_src
+
+#+RESULTS:
+: { one = 1; three = <CODE>; two = <CODE>; }
+
+* let binding
+#+begin_src nix :exports both :results output
+let
+  # names can be assigned in any order
+  b = a + 1;
+  a = 1;
+  c = a + b;
+in
+  # builtins.toJSON [ a b c ] # witout the <CODE>
+  [ a b c ]
+#+end_src
+
+#+RESULTS:
+: [ 1 <CODE> <CODE> ]
+
+* Attr access
+** Simple
+#+begin_src nix :exports both :results output
+let
+  attrset = {x = 1;};
+in
+  attrset.x
+#+end_src
+
+#+RESULTS:
+: 1
+
+** Nested
+#+begin_src nix :exports both :results output
+let
+  attrset = {a = { b = { c = 1; }; }; };
+in
+  attrset.a.b.c
+#+end_src
+
+#+RESULTS:
+: 1
+** Dot used to assing attributes
+#+begin_src nix :exports both :results output
+# { a.b.c = 1; }
+builtins.toJSON{ a.b.c = 1; }
+#+end_src
+
+#+RESULTS:
+: "{\"a\":{\"b\":{\"c\":1}}}"
+
+* with expression
+#+begin_src nix :exports both :results output
+let
+  a = {
+    x = 1;
+    y = 2;
+    z = 3;
+  };
+in
+  with a; builtins.toJSON[ x y z ]
+#+end_src
+
+#+RESULTS:
+: "[1,2,3]"
